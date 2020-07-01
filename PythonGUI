@@ -1,0 +1,62 @@
+'''
+Keenan Cahill
+05/01/20
+CIS1400
+'''
+
+# import *everything* from tkinter
+from tkinter import *
+
+class Tax:
+    def __init__(self):
+        # create window and set title
+        self.mainWindow = Tk()
+        self.mainWindow.title('Property Tax')
+        self.mainWindow.geometry('250x110')
+        
+        # createing test labels and text boxes
+        # first row --> test #1
+        self.prop1Label = Label(self.mainWindow,
+                                text = 'Enter the value of your property: ')
+        self.prop1TextBox = Entry(self.mainWindow, width = 10)
+        # place in grid
+        self.prop1Label.grid(row = 0, column = 0)
+        self.prop1TextBox.grid(row = 0, column = 1)
+        
+        # fourth row --> average output
+        self.resultLabel = Label(self.mainWindow, text = 'Tax')
+        self.taxDue = Label(self.mainWindow, text = '')
+        # place in grid
+        self.resultLabel.grid(row = 3, column = 0)
+        self.taxDue.grid(row = 3, column = 1)
+        
+        # fifth row --> action buttons
+        self.calcButton = Button(self.mainWindow,
+                                 text = 'Calculate Property Tax',
+                                 command = self.calcButton_Click)
+        self.exitButton = Button(self.mainWindow,
+                                 text = 'Exit',
+                                 command = self.mainWindow.destroy)
+        # place in grid
+        self.calcButton.grid(row = 4, column = 0)
+        self.exitButton.grid(row = 4, column = 1)
+        self.eval_price = 0
+        self.tax_due = 0
+        # display window and enter main loop
+        self.mainWindow.mainloop()
+        return
+    
+    # method to process calculate button event handling
+    def calcButton_Click(self):
+        # calculates the tax of given price
+        price = float(self.prop1TextBox.get())
+        self.eval_price = (price*.6)
+        self.tax_due = (self.eval_price/100)*.64
+        self.taxDue.configure(text = format(self.tax_due, '.2f'))
+        return
+            
+def main():
+    myPropTax = Tax()
+    
+# start program by calling main
+main()
